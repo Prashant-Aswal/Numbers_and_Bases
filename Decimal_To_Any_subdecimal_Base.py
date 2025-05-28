@@ -1,4 +1,4 @@
-def converter(num,base):
+def dectoanyb(num,base):
     val = []
     Q = num / base
     M = num % base
@@ -42,7 +42,7 @@ while True:
         print('Invalid Input')
         continue
 
-value = converter(num,base)
+value = dectoanyb(num,base)
 print('\n')
 print(num,'in base',base,'is:',value)
 print('\n')

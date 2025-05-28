@@ -1,4 +1,4 @@
-def convert(num):
+def dectob12(num):
     val = []
     Q = int(num / 12)
     M = num % 12
@@ -37,7 +37,7 @@ while True:
         print('Invalid Input')
         continue
 
-result = convert(num)
+result = dectob12(num)
 print('\n')
 print(num,'in Base 12 is:',result)
 print('\n')

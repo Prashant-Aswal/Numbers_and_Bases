@@ -9,7 +9,7 @@ def num_check(num,base):
             i = i + 1
 
 
-def convert(num,base):
+def anybtodec(num,base):
     val = []
     n = 0
     sno = str(num)
@@ -53,7 +53,7 @@ while True:
         print('Invalid Input')
         continue
 
-result = convert(num,base)
+result = anybtodec(num,base)
 print('\n')
 print(num,'in Base',base,'is',result,'in Decimal')
 print('\n')
