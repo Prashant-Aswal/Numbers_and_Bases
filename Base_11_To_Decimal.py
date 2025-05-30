@@ -12,7 +12,7 @@ def check(num,guide):
         return 'Valid'
 
 
-def b12todec(num):
+def b11todec(num):
     val = []
     c = 0
     for n in num:
@@ -23,9 +23,6 @@ def b12todec(num):
         if val[c] == 'A' or val[c] == 'a':
             val[c] = 10
             c = c + 1
-        elif val[c] == 'B' or val[c] == 'b':
-            val[c] = 11
-            c = c + 1
         else:
             val[c] = int(val[c])
             c = c + 1
@@ -33,30 +30,30 @@ def b12todec(num):
     l = len(val)
     ans = 0
     for r in val:
-        ans = ans + (val[c] * (12 ** (l - 1)))
+        ans = ans + (val[c] * (11 ** (l - 1)))
         c = c + 1
         l = l - 1
     return ans
 
 
-guide_one = ['0','1','2','3','4','5','6','7','8','9','A','B','a','b']
-guide = ['0','1','2','3','4','5','6','7','8','9','A','B']
+guide_one = ['0','1','2','3','4','5','6','7','8','9','A','a']
+guide = ['0','1','2','3','4','5','6','7','8','9','A']
 while True:
     print('\n')
-    print('Use this guide for Base-12 Integers:')
+    print('Use this guide for Base-11 Integers:')
     print('\n')
     print(guide)
     print('\n')
     print('This guide is not case sensitive i.e 34A and 34a will be treated alike')
     print('\n')
-    num = input('Enter the Base-12 Integer(following the guide): ')
+    num = input('Enter the Base-11 Integer(following the guide): ')
     x = check(num,guide_one)
     if x == 'Invalid':
         print('Entered Number does not follow the guide')
         continue
     elif x == 'Valid':
         break
-result = b12todec(num)
+result = b11todec(num)
 print('\n')
-print(num,'(Base-12) in Decimal is:',result)
+print(num,'(Base-11) in Decimal is:',result)
 print('\n')
