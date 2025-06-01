@@ -30,7 +30,7 @@ def dectob12(num):
 # CREATING A TABLE OF 12
 n = 1
 tab = []
-while n <= (12 ** 3):
+while n <= (12 ** 4):
     tab.append(n * 12)
     n = n + 1
 
@@ -57,3 +57,4 @@ for i in tab:
         n = n + 1
         t = t + 1
         continue
+print('Number of Loop Runs:',t)
