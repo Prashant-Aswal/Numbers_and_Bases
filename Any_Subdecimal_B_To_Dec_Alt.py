@@ -11,16 +11,14 @@ def num_check(num,base):
 
 def anybtodec(X,B):
     diff = B - 10
-    p = 0
-    val = []
     N = int(X / 10)
-    val.append(N * diff * (B ** p))
-    p = p + 1
+    val = (N * diff)
+    p = 1
     while N > 0:
         N = int(N / 10)
-        val.append(N * diff * (B ** p))
+        val = val + (N * diff * (B ** p))
         p = p + 1
-    ans = X + sum(val)
+    ans = X + val
     return ans
 
 
