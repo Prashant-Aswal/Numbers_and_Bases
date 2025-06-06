@@ -1,15 +1,13 @@
 def dectoanyb(X,B):
     diff = 10 - B
-    p = 0
-    val = []
     N = int(X / B)
-    val.append(N * diff * (10 ** p))
-    p = p + 1
+    val = (N * diff)
+    p = 1
     while N > 0:
         N = int(N / B)
-        val.append(N * diff * (10 ** p))
+        val = val + (N * diff * (10 ** p))
         p = p + 1
-    ans = X + sum(val)
+    ans = X + val
     return ans
 
 
