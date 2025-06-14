@@ -1,12 +1,16 @@
-def dectob12(num):
+def dectob15(num):
+    try:
+        num = int(num)
+    except:
+        return 'Invalid number'
     val = []
-    Q = int(num / 12)
-    M = num % 12
+    Q = int(num / 15)
+    M = num % 15
     val.append(M)
     while Q > 0:
-        M = Q % 12
+        M = Q % 15
         val.append(M)
-        Q = int(Q / 12)
+        Q = int(Q / 15)
     val.reverse()
     t = 0
     for i in val:
@@ -15,6 +19,12 @@ def dectob12(num):
             val[t] = 'A'
         elif val[t] == '11':
             val[t] = 'B'
+        elif val[t] == '12':
+            val[t] = 'C'
+        elif val[t] == '13':
+            val[t] = 'D'
+        elif val[t] == '14':
+            val[t] = 'E'
         t = t + 1
     n = 0
     ans = None
@@ -25,19 +35,3 @@ def dectob12(num):
             ans = ans + val[n]
         n = n + 1
     return ans
-
-
-while True:
-    print('\n')
-    num = input('Enter any Base 10 Integer: ')
-    try:
-        num = int(num)
-        break
-    except:
-        print('Invalid Input')
-        continue
-
-result = dectob12(num)
-print('\n')
-print(num,'in Base 12 is:',result)
-print('\n')
