@@ -5,5 +5,5 @@ def chk16(num):
         if i in guide:
             continue
         else:
-            return 'Invalid number'
-    return 'Valid'
+            return False
+    return True

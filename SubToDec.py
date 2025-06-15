@@ -1,49 +1,50 @@
-def chksub(num,base):
+def chksub(num, base):
     i = 0
     snum = str(num)
     try:
         base = int(base)
     except:
         return 'Invalid base value'
-    if base == 1:
+    if base < 2 or base > 10:
         return 'Invalid base value'
     else:
         for n in snum:
             try:
                 temp = int(n)
             except:
-                return 'Invalid number'
+                return False
             if int(snum[i]) >= base:
-                return 'Invalid number'
+                return False
             else:
                 i = i + 1
-        return 'Valid'
+        return True
 
 
-def subtodec(X,B):
+def subtodec(num, fromB):
     try:
-        X = int(X)
+        num = int(num)
     except:
         return 'Invalid number'
     try:
-        B = int(B)
+        fromB = int(fromB)
     except:
         return 'Invalid base value'
-    if B == 1:
+    if fromB < 2 or fromB > 10:
         return 'Invalid base value'
     else:
-        chk = chksub(X, B)
-        if chk == 'Invalid number':
+        chk = chksub(num, fromB)
+        if chk is False:
+            return 'Invalid number'
+        elif chk == 'Invalid base value':
             return chk
         else:
-            diff = B - 10
-            N = int(X / 10)
+            diff = fromB - 10
+            N = int(num / 10)
             val = (N * diff)
             p = 1
             while N > 0:
                 N = int(N / 10)
-                val = val + (N * diff * (B ** p))
+                val = val + (N * diff * (fromB ** p))
                 p = p + 1
-            ans = X + val
+            ans = num + val
             return ans
-

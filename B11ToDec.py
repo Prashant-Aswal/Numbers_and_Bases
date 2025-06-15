@@ -5,15 +5,15 @@ def chk11(num):
         if i in guide:
             continue
         else:
-            return 'Invalid'
-    return 'Valid'
+            return False
+    return True
 
 
 def b11todec(num):
     num = str(num)
     chk = chk11(num)
-    if chk == "Invalid":
-        return chk
+    if chk is False:
+        return 'Invalid number'
     else:
         val = []
         c = 0
