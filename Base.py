@@ -1105,12 +1105,16 @@ def base(num, fromB, toB):
             stage = subtodec(X,B1)
             if stage == 'Invalid number':
                 return stage
+            elif stage == 'Invalid base value':
+                return stage
             else:
                 result = dectosub(stage, B2)
                 return result
         elif B1 in Bguide1 and B2 == 11:
             stage = subtodec(X,B1)
             if stage == 'Invalid number':
+                return stage
+            elif stage == 'Invalid base value':
                 return stage
             else:
                 result = dectob11(stage)
@@ -1126,6 +1130,8 @@ def base(num, fromB, toB):
             stage = subtodec(X,B1)
             if stage == 'Invalid number':
                 return stage
+            elif stage == 'Invalid base value':
+                return stage
             else:
                 result = dectob12(stage)
                 return result
@@ -1139,6 +1145,8 @@ def base(num, fromB, toB):
         elif B1 in Bguide1 and B2 == 13:
             stage = subtodec(X,B1)
             if stage == 'Invalid number':
+                return stage
+            elif stage == 'Invalid base value':
                 return stage
             else:
                 result = dectob13(stage)
@@ -1154,6 +1162,8 @@ def base(num, fromB, toB):
             stage = subtodec(X,B1)
             if stage == 'Invalid number':
                 return stage
+            elif stage == 'Invalid base value':
+                return stage
             else:
                 result = dectob14(stage)
                 return result
@@ -1168,6 +1178,8 @@ def base(num, fromB, toB):
             stage = subtodec(X,B1)
             if stage == 'Invalid number':
                 return stage
+            elif stage == 'Invalid base value':
+                return stage
             else:
                 result = dectob15(stage)
                 return result
@@ -1181,6 +1193,8 @@ def base(num, fromB, toB):
         elif B1 in Bguide1 and B2 == 16:
             stage = subtodec(X,B1)
             if stage == 'Invalid number':
+                return stage
+            elif stage == 'Invalid base value':
                 return stage
             else:
                 result = dectob16(stage)
