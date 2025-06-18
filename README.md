@@ -171,7 +171,7 @@ num – any positive integer | can be both **int** and **str** type
 
 base – base of ‘num’ to be checked | can be both **int** and **str** type
 
-Returns – True OR False OR ‘Invalid base value’
+Returns – True OR False OR ‘Invalid base value’ OR 'Invalid number'
 
 Example:
 
@@ -215,4 +215,4 @@ Quick single parameter verifiers
 
 num – any positive integer | can be both **int** and **str** type
 
-Return – True OR False
+Return – True OR False OR 'Invalid number'
