@@ -1,3 +1,10 @@
+def welcome():
+    print('Welcome to rithmetic!')
+
+def ver():
+    print('rithmetic-0.0.12')
+
+
 def chk2(num):
     i = 0
     snum = str(num)
