@@ -1,6 +1,6 @@
 **\__rithmetic__**
 
-“rithmetic” is a budding python package which aims to provide arithmetic and math assistance to students using python to build math related functionality or apps.
+“rithmetic” is a budding python library which aims to provide arithmetic and math assistance to students using python to build math related functionality or apps.
 
 **How to Install:**
 
@@ -8,11 +8,15 @@ Run the following command in Terminal/CLI –
 
 - pip install rithmetic
 
+If you are updating to a new version of rithmetic:
+
+- pip install rithmetic --force-reinstall
+
 After installation completes, run the following command in Terminal/CLI to see the welcome message –
 
 - rith
 
-To check for the version of rithmetic run the following command in Terminal/CLI –
+To check the version of rithmetic, run the following command in Terminal/CLI –
 
 - rith-version
 
@@ -22,8 +26,9 @@ rithmetic comes with the MIT license which means that anyone, anywhere can use i
 
 **Current functionality:**
 
-1. Convert a positive integer from one base to another (Converters)
-2. Check/Verify if a positive integer is from a specified base (Verifiers)
+1. Convert a number from one base to another (Converters)
+2. Check/Verify if a number is from a specified base (Verifiers)
+3. Add, Subtract, Multiply and Divide any two numbers in desired base (Operators)
 
 **Best way to import:**
 
@@ -37,15 +42,15 @@ Converters
 
 **base(num, fromB, toB)**
 
-Converts any positive integer from one base to another. (supported bases are base-2 to base-16)
+Converts any number from one base to another. (supported bases are base-2 to base-16)
 
-num – any positive integer | can be both **int** and **str** type
+num – any number | can be **int** or **float** or **str** type
 
 fromB – base of ‘num’ | can be both **int** and **str** type
 
 toB – ‘num’ gets converted to this base | can be both **int** and **str** type
 
-Returns – The converted Integer OR ‘Invalid number’ OR ‘Invalid base value’
+Returns – The converted number in **int** or **str** or **float** type OR ‘Invalid number’ OR ‘Invalid base value’
 
 Example:
 
@@ -53,17 +58,17 @@ from rithmetic import \*
 <br/>number = base(1111,2,16)  
 print(number)
 
-This will print ‘F’. As 1111 which is a binary number gets converted to F in hexadecimal.
+This will print ‘F’. As 1111 in binary gets converted to F in hexadecimal.
 
 **dectosub(num, toB)**
 
-Converts any positive integer from Decimal to any other sub-decimal base. (supported bases are base-2 to base-9)
+Converts any number from Decimal to any other sub-decimal base. (supported bases are base-2 to base-9)
 
-num – any positive integer | can be both **int** and **str** type
+num – any number | can be **int** or **float** or **str** type
 
 toB – ‘num’ gets converted to this base | can be both **int** and **str** type
 
-Returns – The converted Integer OR ‘Invalid number’ OR ‘Invalid base value’
+Returns – The converted number in **int** or **str** type OR ‘Invalid number’ OR ‘Invalid base value’
 
 Example:
 
@@ -71,17 +76,17 @@ from rithmetic import \*
 <br/>number = dectosub(23,5)  
 print(number)
 
-This will print 43. As 23 which is a decimal number gets converted to 43 in base-5.
+This will print 43. As 23 in decimal gets converted to 43 in base-5.
 
 **subtodec(num, fromB)**
 
-Converts any positive integer from any sub-decimal base to Decimal. (supported bases are base-2 to base-9)
+Converts any number from any sub-decimal base to Decimal. (supported bases are base-2 to base-9)
 
-num – any positive integer | can be both **int** and **str** type
+num – any number | can be **int** or **float** or **str** type
 
 fromB – base of ‘num’ | can be both **int** and **str** type
 
-Returns – The converted Integer OR ‘Invalid number’ OR ‘Invalid base value’
+Returns – The converted number in **int** or **float** type OR ‘Invalid number’ OR ‘Invalid base value’
 
 Example:
 
@@ -123,9 +128,9 @@ Quick single parameter converters
 
 **dectob16(num)**
 
-num – any positive integer | can be both **int** and **str** type
+num – any number | can be **int** or **float** or **str** type
 
-Return – The converted Integer OR ‘Invalid number’
+Return – The converted number in **int** or **str** type OR ‘Invalid number’
 
 - **_Any base to Decimal_**
 
@@ -157,21 +162,21 @@ Return – The converted Integer OR ‘Invalid number’
 
 **b16todec(num)**
 
-num – any positive integer | can be both **int** and **str** type
+num – any number | can be **int** or **float** or **str** type
 
-Return – The converted Integer OR ‘Invalid number’
+Return – The converted number in **int** or **float** type OR ‘Invalid number’
 
 Verifiers
 
 **chkbase(num, base)**
 
-Checks if a positive integer is from a specified base. (supported bases are base-2 to base-16)
+Checks if a number is from a specified base. (supported bases are base-2 to base-16)
 
-num – any positive integer | can be both **int** and **str** type
+num – any number | can be **int** or **float** or **str** type
 
 base – base of ‘num’ to be checked | can be both **int** and **str** type
 
-Returns – True OR False OR ‘Invalid base value’ OR 'Invalid number'
+Returns – True OR False OR ‘Invalid number’ OR ‘Invalid base value’
 
 Example:
 
@@ -213,6 +218,90 @@ Quick single parameter verifiers
 
 **chk16(num)**
 
-num – any positive integer | can be both **int** and **str** type
+num – any number | can be **int** or **float** or **str** type
 
-Return – True OR False OR 'Invalid number'
+Return – True OR False OR ‘Invalid number’
+
+Operators
+
+**add(num1, num2, Base)**
+
+Adds two numbers in desired base. (supported bases are base-2 to base-16)
+
+num1 – any number | can be **int** or **float** or **str** type
+
+num2 – any number, which will be added to ‘num1’ | can be **int** or **float** or **str** type
+
+Base– base of num1 and num2 | can be both **int** and **str** type
+
+Returns – The resultant number in **int** or **str** type OR ‘Invalid number’ OR ‘Invalid base value’
+
+Example:
+
+from rithmetic import \*  
+<br/>sum = add('2a',12,11)  
+print(sum)
+
+This will print 41. As (2a + 12) in base-11 is 41.
+
+**sub(num1, num2, Base)**
+
+Subtracts one number from another in desired base. (supported bases are base-2 to base-16)
+
+num1 – any number | can be **int** or **float** or **str** type
+
+num2 – any number, which will be subtracted from ‘num1’ | can be **int** or **float** or **str** type
+
+Base– base of num1 and num2 | can be both **int** and **str** type
+
+Returns – The resultant number in **int** or **str** type OR ‘Invalid number’ OR ‘Invalid base value’
+
+Example:
+
+from rithmetic import \*  
+<br/>diff = sub(23,'6e',16)  
+print(diff)
+
+This will print -4B. As (23 – 6E) in base-16 is -4B.
+
+**mul(num1, num2, Base)**
+
+Multiplies two numbers in desired base. (supported bases are base-2 to base-16)
+
+num1 – any number | can be **int** or **float** or **str** type
+
+num2 – any number, which will be multiplied with ‘num1’ | can be **int** or **float** or **str** type
+
+Base– base of num1 and num2 | can be both **int** and **str** type
+
+Returns – The resultant number in **int** or **str** type OR ‘Invalid number’ OR ‘Invalid base value’
+
+Example:
+
+from rithmetic import \*  
+<br/>prod = mul(12,24,11)  
+print(prod)
+
+This will print 288. As (12 \* 24) in base-11 is 288.
+
+**div(num1, num2, Base)**
+
+Divides a number by another in desired base. (supported bases are base-2 to base-16)
+
+num1 – any number | can be **int** or **float** or **str** type
+
+num2 – any number, ‘num1’ will be divided by this | can be **int** or **float** or **str** type
+
+Base– base of num1 and num2 | can be both **int** and **str** type
+
+Returns – The resultant number in **int** or **str** type OR ‘Invalid number’ OR ‘Invalid base value’
+
+Example:
+
+from rith import \*  
+<br/>quo = div(22,13,13)  
+print(quo)
+
+This will print 1.99999999999999. AS (22 / 13) in base-13 is 1.99999999999999
+
+**Disclaimer –** rithmetic functions do not round off any numbers and the max level of decimal points is set to 100. So, you will find some **str** type output values with a large number of decimal points (limited to a max of 100).

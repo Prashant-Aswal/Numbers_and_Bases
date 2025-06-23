@@ -5,7 +5,7 @@ with open("README.md", "r", encoding='UTF-8') as f:
 
 setup(
     name= 'rithmetic',
-    version= '0.0.13',
+    version= '0.0.14',
     packages= find_packages(),
     install_requires= [],
     description= "Simple arithmetic lib for students",
