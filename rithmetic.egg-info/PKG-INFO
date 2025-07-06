@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: rithmetic
-Version: 0.0.14
+Version: 0.0.15
 Summary: Simple arithmetic lib for students
 Home-page: https://github.com/Prashant-Aswal/rithmetic
 Author: PrashantAswal
@@ -10,6 +10,7 @@ Classifier: License :: OSI Approved :: MIT License
 Classifier: Programming Language :: Python :: 3.12
 Classifier: Operating System :: OS Independent
 Description-Content-Type: text/markdown
+License-File: LICENSE.md
 Dynamic: author
 Dynamic: author-email
 Dynamic: classifier
@@ -17,9 +18,10 @@ Dynamic: description
 Dynamic: description-content-type
 Dynamic: home-page
 Dynamic: license
+Dynamic: license-file
 Dynamic: summary
 
-**\__rithmetic__**
+**\__’rithmetic__**
 
 “rithmetic” is a budding python library which aims to provide arithmetic and math assistance to students using python to build math related functionality or apps.
 
@@ -50,6 +52,7 @@ rithmetic comes with the MIT license which means that anyone, anywhere can use i
 1. Convert a number from one base to another (Converters)
 2. Check/Verify if a number is from a specified base (Verifiers)
 3. Add, Subtract, Multiply and Divide any two numbers in desired base (Operators)
+4. Evaluate expressions with multiple arithmetic operations in desired base (Calculators)
 
 **Best way to import:**
 
@@ -315,14 +318,112 @@ num2 – any number, ‘num1’ will be divided by this | can be **int** or **fl
 
 Base– base of num1 and num2 | can be both **int** and **str** type
 
-Returns – The resultant number in **int** or **str** type OR ‘Invalid number’ OR ‘Invalid base value’
+Returns – The resultant number in **int** or **str** type OR ‘Invalid number’ OR ‘Invalid base value’ OR ‘Cannot divide by zero’
 
 Example:
 
-from rith import \*  
+from rithmetic import \*  
 <br/>quo = div(22,13,13)  
 print(quo)
 
 This will print 1.99999999999999. AS (22 / 13) in base-13 is 1.99999999999999
 
+**addmany(\*nums, Base)**
+
+Adds multiple numbers together in desired base. (supported bases are base-2 to base-16)
+
+\*nums – a list or stream of numbers to be added together | can be **int** or **float** or **str** type
+
+Base– base of \*nums | can be both **int** and **str** type
+
+Returns – The resultant number in **int** or **str** type OR ‘Invalid number’ OR ‘Invalid base value’
+
+Example:
+
+from rithmetic import \*  
+<br/>nums = \[12, 11, 14, 15, 12\]  
+res = addmany(\*nums, Base=6)  
+print(res)
+
+This will print 112. As sum of the numbers in the list ‘nums’ is 112 in base-6
+
+**mulmany(\*nums, Base)**
+
+Multiplies multiple numbers together in desired base. (supported bases are base-2 to base-16)
+
+\*nums – a list or stream of numbers to be multiplied together | can be **int** or **float** or **str** type
+
+Base– base of \*nums | can be both **int** and **str** type
+
+Returns – The resultant number in **int** or **str** type OR ‘Invalid number’ OR ‘Invalid base value’
+
+Example:
+
+from rithmetic import \*  
+<br/>nums = \[1.2, 1.1, 1.4, 1.5, 1.2\]  
+res = mulmany(\*nums, Base=6)  
+print(res)
+
+This will print 10.200515555555555555524. As product of the numbers in the list ‘nums’ is 10.200515555555555555524 in base-6
+
+**power(num1, num2, Base)**
+
+Calculates the exponent result of two numbers in desired base. (supported bases are base-2 to base-16)
+
+num1 – any number | can be **int** or **float** or **str** type
+
+num2 – any integer, which will be the power of ‘num1’ | can be **int** or **float** or **str** type
+
+Base– base of num1 and num2 | can be both **int** and **str** type
+
+Returns – The resultant number in **int** or **str** type OR ‘Invalid number’ OR ‘Invalid base value’ OR ‘Undefined’
+
+Example:
+
+from rithmetic import \*  
+<br/>res = power(12,2,10)  
+print(res)
+
+This will print 144. As 12 to the power of 2 is 144 in base-10.
+
+Calculators
+
+**exp(expression, Base)**
+
+Parses through a string expression and calculates it’s result in desired base. (supported bases are base-2 to base-16)
+
+expression – any arithmetical expression | should be **str** type
+
+Base– base of calculation and numbers in the expression | can be both **int** and **str** type
+
+Returns – The resultant number in **int** or **str** type OR ‘Invalid number’ OR ‘Invalid base value’ OR ‘Invalid brackets’ OR ‘Undefined power operation’ OR ‘Cannot divide by zero’ OR ‘Fractional powers not supported’ OR ‘Operator missing operand’ OR ‘Invalid operators’ OR ‘Empty brackets’ OR ‘Brackets without any number’
+
+Example:
+
+from rithmetic import \*  
+<br/>res = exp('((101+101)11-10)/10^10-100',2)  
+print(res)
+
+This will print 11. As the result of the entered expression is 11 in base-2.
+
+**exp10(expression)**
+
+Parses through a string expression and calculates it’s result in base-10.
+
+expression – any arithmetical expression | should be **str** type
+
+Returns – The resultant number in **int** or **str** type OR ‘Invalid number’ OR ‘Invalid base value’ OR ‘Invalid brackets’ OR ‘Undefined power operation’ OR ‘Cannot divide by zero’ OR ‘Fractional powers not supported’ OR ‘Operator missing operand’ OR ‘Invalid operators’ OR ‘Empty brackets’ OR ‘Brackets without any number’
+
+Example:
+
+from rithmetic import \*  
+<br/>res = exp10('13.2((12.5-1.2\*4)\*3.12+7)-5.16/4\*2.1')  
+print(res)
+
+This will print 406.8078. As the result of the entered expression is 406.8078 in base-10.
+
 **Disclaimer –** rithmetic functions do not round off any numbers and the max level of decimal points is set to 100. So, you will find some **str** type output values with a large number of decimal points (limited to a max of 100).
+
+**exp** and **exp10** both support ‘^’ and ‘\*\*’ as exponent operators.
+
+rithmetic does not support fractional powers yet.

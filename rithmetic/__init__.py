@@ -52,3 +52,8 @@ from .rith import add
 from .rith import sub
 from .rith import mul
 from .rith import div
+from .rith import addmany
+from .rith import mulmany
+from .rith import power
+from .rith import exp
+from .rith import exp10

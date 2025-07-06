@@ -1,12 +1,12 @@
 def welcome():
     print('\n')
-    print('Welcome to rithmetic!')
+    print('Welcome to __\'rithmetic__')
     print('\n')
 
 
 def ver():
     print('\n')
-    print('rithmetic-0.0.14')
+    print('rithmetic-0.0.15')
     print('\n')
 
 
@@ -3076,6 +3076,8 @@ def div(num1, num2, Base):
         else:
             N1 = float(N1)
             N2 = float(N2)
+            if N2 == 0.0:
+                return 'Cannot divide by zero'
             stage = N1 / N2
             test = str(stage)
             T1, T2 = test.split('.')
@@ -3084,3 +3086,646 @@ def div(num1, num2, Base):
                 stage = int(stage)
             result = base(str(stage), '10', Base)
             return result
+
+
+def addmany(*nums, Base):
+    try:
+        Base = int(Base)
+    except:
+        return 'Invalid base value'
+    if Base < 2 or Base > 16:
+        return 'Invalid base value'
+    else:
+        val = []
+        res = []
+        ans = 0.00
+        for n in nums:
+            val.append(n)
+        for n in val:
+            n = str(n)
+            stage = base(n, Base, 10)
+            if stage == 'Invalid number':
+                return stage
+            else:
+                res.append(float(stage))
+        for n in res:
+            ans = ans + n
+        test = str(ans)
+        T1, T2 = test.split('.')
+        T2 = int(T2)
+        if T2 == 0:
+            ans = int(ans)
+        result = base(str(ans), '10', Base)
+        return result
+
+
+def mulmany(*nums, Base):
+    try:
+        Base = int(Base)
+    except:
+        return 'Invalid base value'
+    if Base < 2 or Base > 16:
+        return 'Invalid base value'
+    else:
+        val = []
+        res = []
+        ans = 1.00
+        for n in nums:
+            val.append(n)
+        for n in val:
+            n = str(n)
+            stage = base(n, Base, 10)
+            if stage == 'Invalid number':
+                return stage
+            else:
+                res.append(float(stage))
+        for n in res:
+            ans = ans * n
+        test = str(ans)
+        T1, T2 = test.split('.')
+        T2 = int(T2)
+        if T2 == 0:
+            ans = int(ans)
+        result = base(str(ans), '10', Base)
+        return result
+
+
+def power(num1, num2, Base):
+    num1 = str(num1)
+    num2 = str(num2)
+    nums = []
+    try:
+        Base = int(Base)
+    except:
+        return 'Invalid base value'
+    if Base < 2 or Base > 16:
+        return 'Invalid base value'
+    chk = chkbase(num1, Base)
+    if chk is False:
+        return 'Invalid number'
+    elif chk == 'Invalid number':
+        return chk
+    elif chk == 'Invalid base value':
+        return chk
+    else:
+        if float(num1) == 0.0 and float(num2) == 0.0:
+            return 'Undefined'
+        chk = chkbase(num2, Base)
+        if chk is False:
+            return 'Invalid number'
+        elif chk == 'Invalid number':
+            return chk
+        elif chk == 'Invalid base value':
+            return chk
+        else:
+            num2 = base(num2, Base, 10)
+            if float(num2) < 0.00:
+                stnums = []
+                while float(num2) < 0.00:
+                    stnums.append(num1)
+                    num2 = float(num2) + 1
+                stage = mulmany(*stnums, Base=Base)
+                ans = div('1', stage, Base)
+                return ans
+            else:
+                while float(num2) > 0.00:
+                    nums.append(num1)
+                    num2 = float(num2) - 1
+                ans = mulmany(*nums, Base=Base)
+                return ans
+
+
+def extractnum(exp1, exp2):
+    exp1 = str(exp1)
+    exp2 = str(exp2)
+    guide = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', 'A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e',
+             'F', 'f']
+    oguide = ['+', '-', '*', '/', '^']
+    num1stage = None
+    num2stage = None
+    num1 = None
+    num2 = None
+    for n in exp1:
+        if n in guide:
+            if num1stage is None:
+                num1stage = n
+            else:
+                num1stage = num1stage + n
+        else:
+            break
+    num1stage = num1stage + '00'
+    if len(num1stage) > len(exp1):
+        num1 = exp1
+    else:
+        num1 = exp1[:len(num1stage)]
+        if num1[len(num1) - 1] in oguide:
+            if num1[len(num1) - 2] == '-' or num1[len(num1) - 2] == '+':
+                num1 = num1[:len(num1) - 1]
+            else:
+                num1 = None
+        else:
+            num1 = num1stage[:len(num1stage) - 2]
+    num1 = ''.join(reversed(num1))
+    if exp2[0] == '-' or exp2[0] == '+':
+        exp2stage = exp2[1:]
+        for n in exp2stage:
+            if n in guide:
+                if num2stage is None:
+                    num2stage = n
+                else:
+                    num2stage = num2stage + n
+            else:
+                break
+        num2 = exp2[0] + num2stage
+    else:
+        for n in exp2:
+            if n in guide:
+                if num2 is None:
+                    num2 = n
+                else:
+                    num2 = num2 + n
+            else:
+                break
+    return num1, num2
+
+
+def insertnum(opt, pos, res, num1, num2, exp):
+    opt = str(opt)
+    pos = int(pos)
+    res = str(res)
+    num1 = str(num1)
+    num2 = str(num2)
+    exp = str(exp)
+    if opt == '**':
+        exp1 = exp[:pos]
+        exp1 = ''.join(reversed(exp1))
+        exp2 = exp[pos + 2:]
+    else:
+        exp1 = exp[:pos]
+        exp1 = ''.join(reversed(exp1))
+        exp2 = exp[pos + 1:]
+    exp1 = exp1[len(num1):]
+    exp1 = ''.join(reversed(exp1))
+    exp2 = exp2[len(num2):]
+    nexp = exp1 + res + exp2
+    return nexp
+
+
+def express(exp, Base):
+    exp = str(exp)
+    try:
+        Base = int(Base)
+    except:
+        return 'Invalid base value'
+    if Base < 2 or Base > 16:
+        return 'Invalid base value'
+    l1 = 0
+    while l1 <= len(exp):
+        pos = exp.find('**', l1)
+        if pos == -1:
+            l1 = l1 + 1
+        else:
+            exp1 = exp[:pos]
+            exp1 = ''.join(reversed(exp1))
+            exp2 = exp[pos + 2:]
+            num1, num2 = extractnum(exp1, exp2)
+            if float(num1) == 0.0 and float(num2) == 0.0:
+                return 'Undefined power operation'
+            for n in num2:
+                if n == '.':
+                    return 'Fractional powers not supported'
+            powres = power(num1, num2, Base)
+            nexp = insertnum('**', pos, powres, num1, num2, exp)
+            exp = nexp
+    l1 = 0
+    while l1 <= len(exp):
+        pos = exp.find('^', l1)
+        if pos == -1:
+            l1 = l1 + 1
+        else:
+            exp1 = exp[:pos]
+            exp1 = ''.join(reversed(exp1))
+            exp2 = exp[pos + 1:]
+            num1, num2 = extractnum(exp1, exp2)
+            if float(num1) == 0.0 and float(num2) == 0.0:
+                return 'Undefined power operation'
+            for n in num2:
+                if n == '.':
+                    return 'Fractional powers not supported'
+            powres = power(num1, num2, Base)
+            nexp = insertnum('^', pos, powres, num1, num2, exp)
+            exp = nexp
+    while True:
+        pos1 = exp.find('*')
+        pos2 = exp.find('/')
+        if pos1 == -1:
+            if pos2 == -1:
+                break
+            else:
+                exp1 = exp[:pos2]
+                exp1 = ''.join(reversed(exp1))
+                exp2 = exp[pos2 + 1:]
+                num1, num2 = extractnum(exp1, exp2)
+                if float(num2) == 0.0:
+                    return 'Cannot divide by zero'
+                divres = div(num1, num2, Base)
+                nexp = insertnum('/', pos2, divres, num1, num2, exp)
+                exp = nexp
+        else:
+            if pos2 == -1:
+                exp1 = exp[:pos1]
+                exp1 = ''.join(reversed(exp1))
+                exp2 = exp[pos1 + 1:]
+                num1, num2 = extractnum(exp1, exp2)
+                mulres = mul(num1, num2, Base)
+                nexp = insertnum('*', pos1, mulres, num1, num2, exp)
+                exp = nexp
+            else:
+                if pos1 < pos2:
+                    exp1 = exp[:pos1]
+                    exp1 = ''.join(reversed(exp1))
+                    exp2 = exp[pos1 + 1:]
+                    num1, num2 = extractnum(exp1, exp2)
+                    mulres = mul(num1, num2, Base)
+                    nexp = insertnum('*', pos1, mulres, num1, num2, exp)
+                    exp = nexp
+                else:
+                    exp1 = exp[:pos2]
+                    exp1 = ''.join(reversed(exp1))
+                    exp2 = exp[pos2 + 1:]
+                    num1, num2 = extractnum(exp1, exp2)
+                    if float(num2) == 0.0:
+                        return 'Cannot divide by zero'
+                    divres = div(num1, num2, Base)
+                    nexp = insertnum('/', pos2, divres, num1, num2, exp)
+                    exp = nexp
+    while True:
+        pos1 = exp.find('+')
+        pos2 = exp.find('-')
+        if pos1 == -1:
+            if pos2 == -1:
+                break
+            else:
+                if pos2 == 0:
+                    pos2 = exp.find('-', 1)
+                    if pos2 == -1:
+                        break
+                exp1 = exp[:pos2]
+                exp1 = ''.join(reversed(exp1))
+                exp2 = exp[pos2 + 1:]
+                num1, num2 = extractnum(exp1, exp2)
+                subres = sub(num1, num2, Base)
+                nexp = insertnum('-', pos2, subres, num1, num2, exp)
+                exp = nexp
+                try:
+                    if float(exp) < 0.0:
+                        break
+                except:
+                    continue
+        else:
+            if pos2 == -1:
+                if pos1 == 0:
+                    pos1 = exp.find('+', 1)
+                    if pos1 == -1:
+                        break
+                exp1 = exp[:pos1]
+                exp1 = ''.join(reversed(exp1))
+                exp2 = exp[pos1 + 1:]
+                num1, num2 = extractnum(exp1, exp2)
+                addres = add(num1, num2, Base)
+                nexp = insertnum('+', pos1, addres, num1, num2, exp)
+                exp = nexp
+                try:
+                    if float(exp) < 0.0:
+                        break
+                except:
+                    continue
+            else:
+                if pos1 < pos2:
+                    if pos1 == 0:
+                        pos1 = exp.find('+', 1)
+                        if pos1 > pos2:
+                            exp1 = exp[:pos2]
+                            exp1 = ''.join(reversed(exp1))
+                            exp2 = exp[pos2 + 1:]
+                            num1, num2 = extractnum(exp1, exp2)
+                            subres = sub(num1, num2, Base)
+                            nexp = insertnum('-', pos2, subres, num1, num2, exp)
+                            exp = nexp
+                            try:
+                                if float(exp) < 0.0:
+                                    break
+                            except:
+                                continue
+                        elif pos1 == -1:
+                            pos1 = exp.find('-')
+                            exp1 = exp[:pos1]
+                            exp1 = ''.join(reversed(exp1))
+                            exp2 = exp[pos1 + 1:]
+                            num1, num2 = extractnum(exp1, exp2)
+                            subres = sub(num1, num2, Base)
+                            nexp = insertnum('-', pos1, subres, num1, num2, exp)
+                            exp = nexp
+                            try:
+                                if float(exp) < 0.0:
+                                    break
+                            except:
+                                continue
+                    exp1 = exp[:pos1]
+                    exp1 = ''.join(reversed(exp1))
+                    exp2 = exp[pos1 + 1:]
+                    num1, num2 = extractnum(exp1, exp2)
+                    addres = add(num1, num2, Base)
+                    nexp = insertnum('+', pos1, addres, num1, num2, exp)
+                    exp = nexp
+                    try:
+                        if float(exp) < 0.0:
+                            break
+                    except:
+                        continue
+                else:
+                    if pos2 == 0:
+                        pos2 = exp.find('-', 1)
+                        if pos2 > pos1:
+                            exp1 = exp[:pos1]
+                            exp1 = ''.join(reversed(exp1))
+                            exp2 = exp[pos1 + 1:]
+                            num1, num2 = extractnum(exp1, exp2)
+                            addres = add(num1, num2, Base)
+                            nexp = insertnum('+', pos1, addres, num1, num2, exp)
+                            exp = nexp
+                            try:
+                                if float(exp) < 0.0:
+                                    break
+                            except:
+                                continue
+                        elif pos2 == -1:
+                            pos2 = exp.find('+')
+                            exp1 = exp[:pos2]
+                            exp1 = ''.join(reversed(exp1))
+                            exp2 = exp[pos2 + 1:]
+                            num1, num2 = extractnum(exp1, exp2)
+                            addres = add(num1, num2, Base)
+                            nexp = insertnum('+', pos2, addres, num1, num2, exp)
+                            exp = nexp
+                            try:
+                                if float(exp) < 0.0:
+                                    break
+                            except:
+                                continue
+                    exp1 = exp[:pos2]
+                    exp1 = ''.join(reversed(exp1))
+                    exp2 = exp[pos2 + 1:]
+                    num1, num2 = extractnum(exp1, exp2)
+                    subres = sub(num1, num2, Base)
+                    nexp = insertnum('-', pos2, subres, num1, num2, exp)
+                    exp = nexp
+                    try:
+                        if float(exp) < 0.0:
+                            break
+                    except:
+                        continue
+    return exp
+
+
+def unpack(exp):
+    exp = str(exp)
+    exp = ''.join(exp.split())
+    op = []
+    cl = []
+    for i, j in enumerate(exp):
+        if j == '(' or j == '{' or j == '[':
+            op.append(i)
+        elif j == ')' or j == '}' or j == ']':
+            cl.append(i)
+    if len(op) != len(cl):
+        return (0, 0), 'Invalid brackets'
+    if len(op) == 0 and len(cl) == 0:
+        return (0, 0), exp
+    itr = 0
+    res = []
+    for i in op:
+        if i < cl[itr]:
+            res.append(i)
+    m = (max(res), cl[itr])
+    if exp[m[0]] == '(':
+        if exp[m[1]] == '}' or exp[m[1]] == ']':
+            return (0, 0), 'Invalid brackets'
+    if exp[m[0]] == '{':
+        if exp[m[1]] == ')' or exp[m[1]] == ']':
+            return (0, 0), 'Invalid brackets'
+    if exp[m[0]] == '[':
+        if exp[m[1]] == '}' or exp[m[1]] == ')':
+            return (0, 0), 'Invalid brackets'
+    val = []
+    for n in range(m[0] + 1, m[1]):
+        val.append(exp[n])
+    st = None
+    for n in val:
+        if st is None:
+            st = n
+        else:
+            st = st + n
+    return m, st
+
+
+def insertbracket(exp, pos, num):
+    exp = str(exp)
+    num = str(num)
+    guide = ['+', '-', '*', '/', '^', '(', '{', '[', ')', '}', ']']
+    if pos[0] == 0 and pos[1] == 0:
+        return exp
+    if num == 'chkexp':
+        exp = ''.join(exp.split())
+        exp1 = exp[:pos[0]]
+        if exp1 is None or exp1 == '':
+            exp1 = exp1
+        else:
+            if exp1[len(exp1) - 1] not in guide:
+                exp1 = exp1 + '*'
+        exp2 = exp[pos[1] + 1:]
+        if exp2 is None or exp2 == '':
+            exp2 = exp2
+        else:
+            if exp2[0] not in guide:
+                exp2 = '*' + exp2
+        nexp = exp1 + '0' + exp2
+        return nexp
+    else:
+        exp = ''.join(exp.split())
+        exp1 = exp[:pos[0]]
+        if exp1 is None or exp1 == '':
+            exp1 = exp1
+        else:
+            if exp1[len(exp1) - 1] not in guide:
+                exp1 = exp1 + '*'
+        exp2 = exp[pos[1] + 1:]
+        if exp2 is None or exp2 == '':
+            exp2 = exp2
+        else:
+            if exp2[0] not in guide:
+                exp2 = '*' + exp2
+        nexp = exp1 + num + exp2
+        return nexp
+
+
+def chkexp(exp, Base):
+    exp = str(exp)
+    try:
+        Base = int(Base)
+    except:
+        return 'Invalid base value'
+    if Base < 2 or Base > 16:
+        return 'Invalid base value'
+    exp = ''.join(exp.split())
+    guide = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e',
+             'F', 'f']
+    nguide = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e',
+             'F', 'f', '.']
+    oguide = ['+', '-', '*', '/', '^']
+    bguide = ['(', ')', '{', '}', '[', ']']
+    texp = exp
+    if texp[len(texp) - 1] in oguide:
+        return 'Operator missing operand'
+    if texp[len(texp) - 1] == '.':
+        return 'Invalid number'
+    if texp[0] == '*' or texp[0] == '/' or texp[0] == '^':
+        return 'Operator missing operand'
+    if texp[0] == '.':
+        return 'Invalid number'
+    opos = texp.find('--')
+    if opos == 0:
+        return 'Invalid operators'
+    opos = texp.find('++')
+    if opos == 0:
+        return 'Invalid operators'
+    iop = ['-*', '+*', '_/', '+/', '-**', '+**', '-^', '+^', '---', '+++', '***', '//', '^^']
+    for i in iop:
+        opos = texp.find(i)
+        if opos == -1:
+            continue
+        else:
+            return 'Invalid operators'
+    nums = []
+    num = None
+    for i, j in enumerate(texp):
+        if j in nguide:
+            if num is None:
+                num = j
+                if i == len(texp)-1:
+                    nums.append(num)
+            else:
+                num = num + j
+                if i == len(texp)-1:
+                    nums.append(num)
+        else:
+            if j in oguide or j in bguide:
+                nums.append(num)
+                num = None
+            else:
+                return 'Invalid number'
+    for num in nums:
+        if num is None:
+            continue
+        else:
+            chk = chkbase(num, Base)
+            if chk is False:
+                return 'Invalid number'
+            elif chk == 'Invalid number':
+                return chk
+            elif chk == 'Invalid base value':
+                return chk
+    while True:
+        pos, st = unpack(texp)
+        if st == texp:
+            break
+        if st == 'Invalid brackets':
+            return st
+        opos = st.find('--')
+        if opos == 0:
+            return 'Invalid operators'
+        opos = texp.find('++')
+        if opos == 0:
+            return 'Invalid operators'
+        chk = False
+        if st is None or st == '':
+            return 'Empty brackets'
+        for i in st:
+            if i in guide:
+                chk = True
+        if chk is False:
+            return 'Brackets without any number'
+        if st[len(st)-1] in oguide:
+            return 'Operator missing operand'
+        if st[len(st) - 1] == '.':
+            return 'Invalid number'
+        if st[0] == '*' or st[0] == '/' or st[0] == '^':
+            return 'Operator missing operand'
+        if st[0] == '.':
+            return 'Invalid number'
+        nexp = insertbracket(texp, pos, 'chkexp')
+        texp = nexp
+    return 'Valid'
+
+
+def exp(expression, Base):
+    exp = str(expression)
+    try:
+        Base = int(Base)
+    except:
+        return 'Invalid base value'
+    if Base < 2 or Base > 16:
+        return 'Invalid base value'
+    exp = ''.join(exp.split())
+    chk = chkexp(exp, Base)
+    if chk != 'Valid':
+        return chk
+    else:
+        while True:
+            pos, st = unpack(exp)
+            if st == exp:
+                break
+            if st == 'Invalid brackets':
+                return st
+            num = express(st, Base)
+            if num == 'Invalid base value':
+                return num
+            if num == 'Undefined power operation':
+                return num
+            if num == 'Cannot divide by zero':
+                return num
+            if num == 'Fractional powers not supported':
+                return num
+            nexp = insertbracket(exp, pos, num)
+            exp = nexp
+        ans = express(exp, Base)
+        return ans
+
+
+def exp10(expression):
+    Base = 10
+    exp = str(expression)
+    exp = ''.join(exp.split())
+    chk = chkexp(exp, Base)
+    if chk != 'Valid':
+        return chk
+    else:
+        while True:
+            pos, st = unpack(exp)
+            if st == exp:
+                break
+            if st == 'Invalid brackets':
+                return st
+            num = express(st, Base)
+            if num == 'Invalid base value':
+                return num
+            if num == 'Undefined power operation':
+                return num
+            if num == 'Cannot divide by zero':
+                return num
+            if num == 'Fractional powers not supported':
+                return num
+            nexp = insertbracket(exp, pos, num)
+            exp = nexp
+        ans = express(exp, Base)
+        return ans
