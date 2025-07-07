@@ -6,7 +6,7 @@ def welcome():
 
 def ver():
     print('\n')
-    print('rithmetic-0.0.15')
+    print('rithmetic-0.0.17')
     print('\n')
 
 
@@ -3153,7 +3153,6 @@ def mulmany(*nums, Base):
 def power(num1, num2, Base):
     num1 = str(num1)
     num2 = str(num2)
-    nums = []
     try:
         Base = int(Base)
     except:
@@ -3168,8 +3167,6 @@ def power(num1, num2, Base):
     elif chk == 'Invalid base value':
         return chk
     else:
-        if float(num1) == 0.0 and float(num2) == 0.0:
-            return 'Undefined'
         chk = chkbase(num2, Base)
         if chk is False:
             return 'Invalid number'
@@ -3178,21 +3175,20 @@ def power(num1, num2, Base):
         elif chk == 'Invalid base value':
             return chk
         else:
+            if float(num1) == 0.0 and float(num2) == 0.0:
+                return 'Undefined'
+            num1 = base(num1, Base, 10)
             num2 = base(num2, Base, 10)
-            if float(num2) < 0.00:
-                stnums = []
-                while float(num2) < 0.00:
-                    stnums.append(num1)
-                    num2 = float(num2) + 1
-                stage = mulmany(*stnums, Base=Base)
-                ans = div('1', stage, Base)
-                return ans
+            res = float(num1) ** float(num2)
+            test = str(res)
+            T1, T2 = test.split('.')
+            T2 = int(T2)
+            if T2 == 0:
+                ans = int(res)
+                result = base(str(ans), '10', Base)
             else:
-                while float(num2) > 0.00:
-                    nums.append(num1)
-                    num2 = float(num2) - 1
-                ans = mulmany(*nums, Base=Base)
-                return ans
+                result = base(test, '10', Base)
+    return str(result)
 
 
 def extractnum(exp1, exp2):
@@ -3291,9 +3287,6 @@ def express(exp, Base):
             num1, num2 = extractnum(exp1, exp2)
             if float(num1) == 0.0 and float(num2) == 0.0:
                 return 'Undefined power operation'
-            for n in num2:
-                if n == '.':
-                    return 'Fractional powers not supported'
             powres = power(num1, num2, Base)
             nexp = insertnum('**', pos, powres, num1, num2, exp)
             exp = nexp
@@ -3309,9 +3302,6 @@ def express(exp, Base):
             num1, num2 = extractnum(exp1, exp2)
             if float(num1) == 0.0 and float(num2) == 0.0:
                 return 'Undefined power operation'
-            for n in num2:
-                if n == '.':
-                    return 'Fractional powers not supported'
             powres = power(num1, num2, Base)
             nexp = insertnum('^', pos, powres, num1, num2, exp)
             exp = nexp
@@ -3694,8 +3684,6 @@ def exp(expression, Base):
                 return num
             if num == 'Cannot divide by zero':
                 return num
-            if num == 'Fractional powers not supported':
-                return num
             nexp = insertbracket(exp, pos, num)
             exp = nexp
         ans = express(exp, Base)
@@ -3722,8 +3710,6 @@ def exp10(expression):
             if num == 'Undefined power operation':
                 return num
             if num == 'Cannot divide by zero':
-                return num
-            if num == 'Fractional powers not supported':
                 return num
             nexp = insertbracket(exp, pos, num)
             exp = nexp

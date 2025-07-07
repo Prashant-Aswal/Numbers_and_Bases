@@ -5,7 +5,7 @@ with open("README.md", "r", encoding='UTF-8') as f:
 
 setup(
     name= 'rithmetic',
-    version= '0.0.15',
+    version= '0.0.17',
     packages= find_packages(),
     install_requires= [],
     description= "Simple arithmetic lib for students",
@@ -15,7 +15,7 @@ setup(
     author= "PrashantAswal",
     author_email= "prashant.aswal89@gmail.com",
     license= "MIT",
-    license_files= ("LICENSE.md",),
+    license_files= ["LICENSE.md",],
     classifiers=[
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3.12",

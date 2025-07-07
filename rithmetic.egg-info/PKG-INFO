@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: rithmetic
-Version: 0.0.15
+Version: 0.0.17
 Summary: Simple arithmetic lib for students
 Home-page: https://github.com/Prashant-Aswal/rithmetic
 Author: PrashantAswal
@@ -396,7 +396,7 @@ expression – any arithmetical expression | should be **str** type
 
 Base– base of calculation and numbers in the expression | can be both **int** and **str** type
 
-Returns – The resultant number in **int** or **str** type OR ‘Invalid number’ OR ‘Invalid base value’ OR ‘Invalid brackets’ OR ‘Undefined power operation’ OR ‘Cannot divide by zero’ OR ‘Fractional powers not supported’ OR ‘Operator missing operand’ OR ‘Invalid operators’ OR ‘Empty brackets’ OR ‘Brackets without any number’
+Returns – The resultant number in **int** or **str** type OR ‘Invalid number’ OR ‘Invalid base value’ OR ‘Invalid brackets’ OR ‘Undefined power operation’ OR ‘Cannot divide by zero’ OR ‘Operator missing operand’ OR ‘Invalid operators’ OR ‘Empty brackets’ OR ‘Brackets without any number’
 
 Example:
 
@@ -412,7 +412,7 @@ Parses through a string expression and calculates it’s result in base-10.
 
 expression – any arithmetical expression | should be **str** type
 
-Returns – The resultant number in **int** or **str** type OR ‘Invalid number’ OR ‘Invalid base value’ OR ‘Invalid brackets’ OR ‘Undefined power operation’ OR ‘Cannot divide by zero’ OR ‘Fractional powers not supported’ OR ‘Operator missing operand’ OR ‘Invalid operators’ OR ‘Empty brackets’ OR ‘Brackets without any number’
+Returns – The resultant number in **int** or **str** type OR ‘Invalid number’ OR ‘Invalid base value’ OR ‘Invalid brackets’ OR ‘Undefined power operation’ OR ‘Cannot divide by zero’ OR ‘Operator missing operand’ OR ‘Invalid operators’ OR ‘Empty brackets’ OR ‘Brackets without any number’
 
 Example:
 
@@ -424,6 +424,4 @@ This will print 406.8078. As the result of the entered expression is 406.8078 in
 
 **Disclaimer –** rithmetic functions do not round off any numbers and the max level of decimal points is set to 100. So, you will find some **str** type output values with a large number of decimal points (limited to a max of 100).
 
-**exp** and **exp10** both support ‘^’ and ‘\*\*’ as exponent operators.
-
-rithmetic does not support fractional powers yet.
+**exp** and **exp10** support both ‘^’ and ‘\*\*’ as exponent operators.
