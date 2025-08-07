@@ -2,6 +2,7 @@ LICENSE.md
 README.md
 setup.py
 rithmetic/__init__.py
+rithmetic/func.py
 rithmetic/rith.py
 rithmetic.egg-info/PKG-INFO
 rithmetic.egg-info/SOURCES.txt

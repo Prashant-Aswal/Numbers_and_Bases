@@ -6,7 +6,7 @@ def welcome():
 
 def ver():
     print('\n')
-    print('rithmetic-0.0.17')
+    print('rithmetic-0.0.19')
     print('\n')
 
 
